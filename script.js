@@ -1,5 +1,6 @@
 let interviewList = [];
 let rejectedList = [];
+let currentStatus = 'all'
 
 
 let total = document.getElementById('total');
@@ -7,53 +8,58 @@ let interviewCount = document.getElementById('interviewCount');
 let rejectedCount = document.getElementById('rejectedCount');
 let availableJobs = document.getElementById('availableJobs');
 
-// filterded
+
+let allFilterBtn = document.getElementById('all-filter-btn')
+let interviewFilterBtn = document.getElementById('interview-filter-btn')
+let rejectedFilterBtn = document.getElementById('rejected-filter-btn')
+
+
+const jobCardSection = document.getElementById('jobCardSection')
 const filteredSection = document.getElementById('filteredSection')
 
 
 
 
 function calculateCount() {
-    total.innerText = document.getElementById('jobCardSection').children.length;
+    total.innerText = jobCardSection.children.length;
     availableJobs.innerText = document.getElementById('jobCardSection').children.length;
     interviewCount.innerText = interviewList.length
     rejectedCount.innerText = rejectedList.length
 }
-calculateCount();
-
-
-let allBtn = document.getElementById('allBtn')
-let interviewBtn = document.getElementById('interviewBtn')
-let rejectedBtn = document.getElementById('rejectedBtn')
-
-
-
+calculateCount()
 
 
 function toggleStyle(id) {
-    allBtn.classList.add('bg-white', 'text-gray-600')
-    interviewBtn.classList.add('bg-white', 'text-gray-600')
-    rejectedBtn.classList.add('bg-white', 'text-gray-600')
+    allFilterBtn.classList.add('bg-white', 'text-gray-600')
+    interviewFilterBtn.classList.add('bg-white', 'text-gray-600')
+    rejectedFilterBtn.classList.add('bg-white', 'text-gray-600')
 
-    allBtn.classList.remove('bg-blue-500', 'text-white')
-    interviewBtn.classList.remove('bg-blue-500', 'text-white')
-    rejectedBtn.classList.remove('bg-blue-500', 'text-white')
+    allFilterBtn.classList.remove('bg-blue-500', 'text-white')
+    interviewFilterBtn.classList.remove('bg-blue-500', 'text-white')
+    rejectedFilterBtn.classList.remove('bg-blue-500', 'text-white')
 
 
 
     let selected = document.getElementById(id)
-    //  currentStatus = id
-    //  console.log(currentStatus)
+     currentStatus = id
+
     selected.classList.add('bg-blue-500', 'text-white')
     selected.classList.remove('bg-white', 'text-gray-600')
 
-    if (id == 'interviewBtn') {
+    if (id == 'interview-filter-btn') {
         jobCardSection.classList.add('hidden')
         filteredSection.classList.remove('hidden')
+        renderInterview()
 
-    } else if (id == 'allBtn') {
+    } else if (id == 'all-filter-btn') {
         jobCardSection.classList.remove('hidden')
         filteredSection.classList.add('hidden')
+    } else if (id == 'rejected-filter-button'){
+         jobCardSection.classList.add('hidden');
+         filteredSection.classList.remove('hidden');
+         renderRejected()
+
+
     }
 
 
@@ -88,12 +94,52 @@ jobCardSection.addEventListener("click", function (event) {
             interviewList.push(cardInfo)
         }
 
+        rejectedList = rejectedList.filter(item => item.jobOneTitle != cardInfo.jobOneTitle)
+        
+        
 
-        calculateCount();
+        if(currentStatus = "rejected-filter-button"){
+            renderRejected()
+        }
+        calculateCount()
 
-        renderInterview();
+    }
+    else if (event.target.classList.contains('rejected-button')) {
+        const parentNode = event.target.parentNode.parentNode;
+        const jobOneTitle = parentNode.querySelector('.jobOneTitle').innerText
+        const jobOneSkill = parentNode.querySelector('.jobOneSkill').innerText
+        const salary = parentNode.querySelector('.salary').innerText
+        const status = parentNode.querySelector('#status').innerText
+        const jobOneInfo = parentNode.querySelector('.jobOneInfo').innerText
+        parentNode.querySelector('#status').innerText = 'Rejected'
+
+
+        const cardInfo = {
+            jobOneTitle,
+            jobOneSkill,
+            salary,
+            status: 'Rejected',
+            jobOneInfo
+        }
+
+
+        const jobExits = rejectedList.find(item => item.jobOneTitle == cardInfo.jobOneTitle)
+
+
+        if (!jobExits) {
+            rejectedList.push(cardInfo)
+        }
+        interviewList = interviewList.filter(item => item.jobOneTitle != cardInfo.jobOneTitle)
+
+        if(currentStatus == "interview-filter-button"){
+            renderInterview();
+        }
+        calculateCount()
+
+        
 
     }   
+   
 
     })
     
@@ -132,37 +178,38 @@ function renderInterview() {
 
 }
 
-// function renderRejected() {
-//     filteredSection.innerHTML = ''
-//     for (let reject of rejectedList) {
-//         console.log(reject)
-//         let div = document.createElement('div')
-//         div.innerHTML = `
-//          <div class="job-card-1 shadow-sm p-5">
-//             <div class="flex justify-between">
-//                 <div>
-//                     <h2 class="jobOneTitle font-bold text-xl">${reject.jobOneTitle}</h2>
-//                     <p class="jobOneSkill">React Native Developer</p>
-//                 </div>
-//                 <span><i class="fa-regular fa-trash-can"></i></span>
-//             </div>
+function renderRejected() {
+    filteredSection.innerHTML = ''
+    for (let reject of rejectedList) {
 
-//             <p class="salary my-4">Remote • Full-time • $130,000 - $175,000</p>
-//             <button id ='status' class=" btn mb-2">${reject.status}</button>
-//             <p class="jobOneInfo mb-4">Build cross-platform mobile applications using React Native. Work on products used by
-//                 millions of users worldwide.</p>
-//             <div class="flex gap-4">
-//                 <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-//                 <button class="btn btn-outline btn-error px-4">REJECTED</button>
-//             </div>
-//         </div>
-//         `
-//         filteredSection.appendChild(div)
-//     }
+        let div = document.createElement('div');
+        div.innerHTML = `
+         <div class="job-card-1 shadow-sm p-5">
+            <div class="flex justify-between">
+                <div>
+                    <h2 class="jobOneTitle font-bold text-xl">${reject.jobOneTitle}</h2>
+                    <p class="jobOneSkill">React Native Developer</p>
+                </div>
+                <span><i class="fa-regular fa-trash-can"></i></span>
+            </div>
+
+            <p class="salary my-4">Remote • Full-time • $130,000 - $175,000</p>
+            <button id ='status' class=" btn mb-2">${reject.status}</button>
+            <p class="jobOneInfo mb-4">Build cross-platform mobile applications using React Native. Work on products used by
+                millions of users worldwide.</p>
+            <div class="flex gap-4">
+                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+            </div>
+        </div>
+        `
+        
+        filteredSection.appendChild(div)
+    }
 
 
 
-// }
+}
 
 
 
