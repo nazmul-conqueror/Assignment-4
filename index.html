@@ -66,45 +66,52 @@
             <button onclick="toggleStyle('rejectedBtn')" id="rejectedBtn" class="bg-white px-8 py-2 text-gray-600 shadow-sm rounded">Rejected</button>
         </div>
 
+        <!-- filtered section -->
+         <section id="filteredSection" class="hidden">
+
+         </section>
+
+
         <div id="jobCardSection">
             <!-- JOb Card 1 -->
         <div class="job-card-1 shadow-sm p-5">
             <div class="flex justify-between">
                 <div>
-                    <h2 class="font-bold text-xl">Mobile First Corp</h2>
-                    <p>React Native Developer</p>
+                    <h2 class="jobOneTitle font-bold text-xl">Mobile First Corp</h2>
+                    <p class="jobOneSkill">React Native Developer</p>
                 </div>
                 <span><i class="fa-regular fa-trash-can"></i></span>
             </div>
 
-            <p class="my-4">Remote • Full-time • $130,000 - $175,000</p>
-            <button class="btn mb-2">NOT APPLIED </button>
-            <p class="mb-4">Build cross-platform mobile applications using React Native. Work on products used by
+            <p class="salary my-4">Remote • Full-time • $130,000 - $175,000</p>
+            <button id ='status' class=" btn mb-2">NOT APPLIED </button>
+            <p class="jobOneInfo mb-4">Build cross-platform mobile applications using React Native. Work on products used by
                 millions of users worldwide.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
 
-            <!-- job card 2 -->
-
+        
         </div>
+
+        <!-- job card 2 -->
         <div class="job-card-1 shadow-sm p-5">
             <div class="flex justify-between">
                 <div>
-                    <h2 class="font-bold text-xl">WebFlow Agency</h2>
-                    <p>Web Designer & Developer</p>
+                    <h2 class=" jobOneTitle font-bold text-xl">WebFlow Agency</h2>
+                    <p class="jobOneSkill">Web Designer & Developer</p>
                 </div>
                 <span><i class="fa-regular fa-trash-can"></i></span>
             </div>
 
-            <p class="my-4">Boston, MA • Full-time • $125,000 - $165,000</p>
-            <button class="btn mb-2">NOT APPLIED </button>
-            <p class="mb-4">Create stunning web experiences for high-profile clients. Must have portfolio and experience
+            <p class=" salary my-4">Boston, MA • Full-time • $125,000 - $165,000</p>
+            <button id="status" class=" btn mb-2">NOT APPLIED </button>
+            <p class="jobOneInfo mb-4">Create stunning web experiences for high-profile clients. Must have portfolio and experience
                 with modern web design trends.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
         </div>
 
@@ -124,13 +131,13 @@
             <p class="mb-4">Transform complex data into compelling visualizations. Required skills: D3.js, React, and
                 strong analytical thinking.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
 
-
-            <!-- job card 4 -->
         </div>
+        
+        <!-- job card 4 -->
         <div class="job-card-1 shadow-sm p-5">
             <div class="flex justify-between">
                 <div>
@@ -145,8 +152,8 @@
             <p class="mb-4">Design and maintain scalable backend systems using Python and AWS. Work with modern DevOps
                 practices and cloud infrastructure.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
         </div>
 
@@ -166,8 +173,8 @@
             <p class="mb-4">Create beautiful and functional user interfaces for our suite of products. Strong design
                 skills and frontend development expertise required.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
 
         </div>
@@ -187,8 +194,8 @@
             <p class="mb-4">Build enterprise applications with JavaScript and modern frameworks. We offer competitive
                 compensation, health insurance, and professional development opportunities.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
 
         </div>
@@ -208,8 +215,8 @@
             <p class="mb-4">Join our fast-growing startup and work on our core platform. Experience with Node.js and
                 React required. Great benefits and equity package included.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
 
         </div>
@@ -229,8 +236,8 @@
             <p class="mb-4">We are looking for an experienced Frontend Developer to build scalable web applications
                 using React and TypeScript. You will work with a talented team on cutting-edge projects.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
         </div>
         </div>
