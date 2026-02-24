@@ -15,7 +15,8 @@ let rejectedFilterBtn = document.getElementById('rejected-filter-btn')
 
 
 const jobCardSection = document.getElementById('jobCardSection')
-const filteredSection = document.getElementById('filteredSection')
+let interviewSection = document.getElementById('interviewSection')
+let rejectedSection = document.getElementById('rejectedSection')
 
 
 
@@ -41,23 +42,28 @@ function toggleStyle(id) {
 
 
     let selected = document.getElementById(id)
-     currentStatus = id
+    currentStatus = id
 
     selected.classList.add('bg-blue-500', 'text-white')
     selected.classList.remove('bg-white', 'text-gray-600')
 
     if (id == 'interview-filter-btn') {
         jobCardSection.classList.add('hidden')
-        filteredSection.classList.remove('hidden')
+        interviewSection.classList.remove('hidden')
+        rejectedSection.classList.add('hidden')
+
         renderInterview()
 
     } else if (id == 'all-filter-btn') {
         jobCardSection.classList.remove('hidden')
-        filteredSection.classList.add('hidden')
-    } else if (id == 'rejected-filter-button'){
-         jobCardSection.classList.add('hidden');
-         filteredSection.classList.remove('hidden');
-         renderRejected()
+        interviewSection.classList.add('hidden')
+        rejectedSection.classList.add('hidden')
+    } else if (id == 'rejected-filter-btn') {
+        jobCardSection.classList.add('hidden')
+        interviewSection.classList.add('hidden')
+        rejectedSection.classList.remove('hidden')
+
+        renderRejected()
 
 
     }
@@ -95,11 +101,11 @@ jobCardSection.addEventListener("click", function (event) {
         }
 
         rejectedList = rejectedList.filter(item => item.jobOneTitle != cardInfo.jobOneTitle)
-        
-        
 
-        if(currentStatus = "rejected-filter-button"){
-            renderRejected()
+
+
+        if (currentStatus = "rejected-filter-btn") {
+            renderRejected();
         }
         calculateCount()
 
@@ -131,23 +137,24 @@ jobCardSection.addEventListener("click", function (event) {
         }
         interviewList = interviewList.filter(item => item.jobOneTitle != cardInfo.jobOneTitle)
 
-        if(currentStatus == "interview-filter-button"){
+
+        if (currentStatus == "interview-filter-btn") {
             renderInterview();
         }
         calculateCount()
 
-        
 
-    }   
-   
 
-    })
-    
+    }
+
+
+})
+
 
 
 
 function renderInterview() {
-    filteredSection.innerHTML = ''
+    interviewSection.innerHTML = ''
     for (let interview of interviewList) {
         console.log(interview)
         let div = document.createElement('div')
@@ -171,7 +178,7 @@ function renderInterview() {
             </div>
         </div>
         `
-        filteredSection.appendChild(div)
+        interviewSection.appendChild(div)
     }
 
 
@@ -179,22 +186,22 @@ function renderInterview() {
 }
 
 function renderRejected() {
-    filteredSection.innerHTML = ''
-    for (let reject of rejectedList) {
-
+    rejectedSection.innerHTML = ''
+    for (let rejected of rejectedList) {
+        console.log(rejected)
         let div = document.createElement('div');
         div.innerHTML = `
          <div class="job-card-1 shadow-sm p-5">
             <div class="flex justify-between">
                 <div>
-                    <h2 class="jobOneTitle font-bold text-xl">${reject.jobOneTitle}</h2>
+                    <h2 class="jobOneTitle font-bold text-xl">${rejected.jobOneTitle}</h2>
                     <p class="jobOneSkill">React Native Developer</p>
                 </div>
                 <span><i class="fa-regular fa-trash-can"></i></span>
             </div>
 
             <p class="salary my-4">Remote • Full-time • $130,000 - $175,000</p>
-            <button id ='status' class=" btn mb-2">${reject.status}</button>
+            <button id ='status' class=" btn mb-2">${rejected.status}</button>
             <p class="jobOneInfo mb-4">Build cross-platform mobile applications using React Native. Work on products used by
                 millions of users worldwide.</p>
             <div class="flex gap-4">
@@ -203,15 +210,22 @@ function renderRejected() {
             </div>
         </div>
         `
-        
-        filteredSection.appendChild(div)
-    }
 
+        rejectedSection.appendChild(div)
+    }
 
 
 }
 
 
 
+
+
+    jobCardSection.addEventListener("click", function (event) {
+       
+      if (event.target.classList.contains("delete-btn")) {
+        event.target.parentNode.parentNode.parentNode.remove();
+      }
+    });
 
 
