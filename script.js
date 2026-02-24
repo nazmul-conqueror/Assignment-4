@@ -99,14 +99,18 @@ jobCardSection.addEventListener("click", function (event) {
         if (!jobExits) {
             interviewList.push(cardInfo)
         }
-
+        
         rejectedList = rejectedList.filter(item => item.jobOneTitle != cardInfo.jobOneTitle)
+        
+        
 
-
-
-        if (currentStatus = "rejected-filter-btn") {
+        if (currentStatus == "rejected-filter-btn") {
             renderRejected();
         }
+
+       
+
+
         calculateCount()
 
     }
@@ -137,7 +141,7 @@ jobCardSection.addEventListener("click", function (event) {
         }
         interviewList = interviewList.filter(item => item.jobOneTitle != cardInfo.jobOneTitle)
 
-
+        
         if (currentStatus == "interview-filter-btn") {
             renderInterview();
         }
@@ -173,8 +177,8 @@ function renderInterview() {
             <p class="jobOneInfo mb-4">Build cross-platform mobile applications using React Native. Work on products used by
                 millions of users worldwide.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button  btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
         </div>
         `
@@ -205,8 +209,8 @@ function renderRejected() {
             <p class="jobOneInfo mb-4">Build cross-platform mobile applications using React Native. Work on products used by
                 millions of users worldwide.</p>
             <div class="flex gap-4">
-                <button class="btn btn-outline btn-success px-4">INTERVIEW</button>
-                <button class="btn btn-outline btn-error px-4">REJECTED</button>
+                <button class="interview-button  btn btn-outline btn-success px-4">INTERVIEW</button>
+                <button class="rejected-button btn btn-outline btn-error px-4">REJECTED</button>
             </div>
         </div>
         `
@@ -228,4 +232,13 @@ function renderRejected() {
       }
     });
 
+
+    let mainContainer = document.getElementById('mainContainer')
+
+
+    mainContainer.addEventListener("click", function(){
+
+
+
+    })
 
